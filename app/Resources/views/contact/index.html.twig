@@ -1,0 +1,47 @@
+{% extends 'main.html.twig' %}
+{% block title %} Carnet d'adresses{% endblock %}
+{% block content %}
+    <h1>Carnet d'adresses</h1>
+
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+			
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Site web</th>
+                <th>Numero de telephone </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td> <a href="{{ path('contact_show', { 'id': contact.id }) }}">{{ contact.email }}</a></td>
+                <td>{{ contact.adresse }}</td>
+                <td>{{ contact.siteweb }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>
+                    <!--<ul>
+                        <li>-->
+                            <a class="button" href="{{ path('contact_show', { 'id': contact.id }) }}">show</a>
+                        </td>
+						<!--</li>
+                        <li>-->
+						<td>
+                            <a class="button" href="{{ path('contact_edit', { 'id': contact.id }) }}">edit</a>
+                        <!--</li>
+                    </ul>-->
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contact_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

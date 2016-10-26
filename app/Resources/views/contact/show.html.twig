@@ -1,0 +1,47 @@
+{% extends 'main.html.twig' %}
+{% block title %} Ajouter un contact{% endblock %}
+{% block content %}
+    <h1>Contact</h1>
+	
+	<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ contact.id }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ contact.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Siteweb</th>
+                <td>{{ contact.siteweb }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ contact.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ contact.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <li>
+			<td>
+				<a class="button" href="{{ path('contact_index') }}">Back to the list</a>
+			</td>
+			<td>
+				<a class="button" href="{{ path('contact_edit', { 'id': contact.id }) }}">Edit</a>
+			</td>
+			<td>
+				{{ form_start(delete_form) }}
+					<input class="button" type="submit" value="Delete">
+				{{ form_end(delete_form) }}
+				</td>
+        </li>
+    </ul>
+{% endblock %}

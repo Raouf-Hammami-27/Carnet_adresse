@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" />
+		
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"  media="all" />       
+       
+ 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+
+<title>hello</title> 
+          
+<!--[if IE]><link rel="stylesheet" href="http://media3.iwc.com/site_media/chrome/css/ie_.css"/><![endif]-->
+
+<body>
+
+	
+    <header style="position: relative; top: 0px;">
+	<div id="pageHeader" data-gtm="[,]">
+        <div id="nav">
+		<ul id="topNav" class="nav">
+
+
+			<li class="ddLink">
+				<a class="first" href="{{ path('fos_user_profile_show') }}">Home</a>
+				 
+			</li>
+			
+			 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                             
+                             <li class="ddLink">
+				<a href="{{ path('contact_index') }}">Contacts</a>
+				 
+                         </li>
+                          {% endif %}
+
+
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li class="signInRegister signInLinkL10n"><a href="{{ path('fos_user_security_logout') }}">log Out</a></li>
+                <li class="signInRegister registerLinkL10n"> <a hred="#">Connected as: {{app.user.username}}</a></li>
+
+              {% else %}
+                <li class="signInRegister registerLinkL10n"><a id="register_anchor" href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                <li class="signInRegister signInLinkL10n"><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+            
+              {% endif %}
+            
+			 
+		</ul> 
+        </div>
+ 	</div>
+    </header>
+	 
+     
+
+ 	<div id="wrapper">
+	 
+ 
+
+<div class="conciergeBar conciergeInternationalBar conciergeLocationBar">
+	<div class="conciergeBarContentWrapper conciergeBarFloat">
+		<div class="conciergeBarContent">
+		<div class="conciergeBarContentInner">
+			  Welcome to Your Blog
+			 
+            
+			 
+            
+		</div>
+		</div>
+	</div>
+    
+</div>
+
+<div class="grid">
+                                            
+                                             {% block content %}
+                                                 {%endblock%}
+ 								
+				
+                     
+                    
+               </div>
+			
+ 
+
+
+
+	</div>
+ 
+  
+        </body>
+</html>
+

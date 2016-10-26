@@ -1,0 +1,31 @@
+ {% extends "main.html.twig" %}
+ {% block content %}
+ 
+{% for user in entities %}
+    <div class="row" style="background-color: white;">
+        <a href="#"> 
+            <h2 style="color:black">  
+                <span>  {{user.username}}</span>
+            </h2>
+        </a>
+                Current Role:  {{user.roles[0]}}<br>
+                {% if user.roles[0]=='ROLE_ADMIN' or user.roles[0]=='ROLE_USER' %}
+                 <a href="{{ path('user_make_moderator',{'id':user.id})}}">
+                   Make Moderator
+                </a>
+                {% else %}
+                      <a href="{{ path('user_make_admin',{'id':user.id})}}">
+            Make Admin
+        </a>
+                {% endif %}
+       
+      
+           
+    </div>
+     
+                   	 
+{% endfor %} 
+
+
+ {% endblock %}
+ 

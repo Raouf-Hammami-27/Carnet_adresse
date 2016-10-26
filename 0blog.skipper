@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<skipper version="3.2.7.1338" mvc="Symfony2" orm="Doctrine2" name="0blog" uuid="7555c14a-4339-4e38-afc4-2e32475912d2">
+  <module name="\src/CategoryBundle/Entity" local-name="src/CategoryBundle/Entity" namespace="\CategoryBundle\Entity" local-namespace="\CategoryBundle\Entity" export-format="Doctrine2Php" export-path="src/CategoryBundle/Entity" uuid="37def56d-cea6-4746-808e-a50d35ad4a39">
+    <entity name="\CategoryBundle\Entity\Category" local-name="Category" namespace="\CategoryBundle\Entity" uuid="2c8cc2f3-39ff-42e4-b2bb-199b50b8ec77">
+      <field name="id" type="integer" required="true" primary="true" uuid="c139774b-b7d3-4243-a4b5-4960aba8e20e">
+        <orm-attributes>
+          <attribute name="column">id</attribute>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="string" size="255" uuid="ed45cb8b-6972-4c5d-bc84-200d9a6700ab">
+        <orm-attributes>
+          <attribute name="column">name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="idUser_id" required="true" uuid="5770fe0f-1ed4-40cf-ae81-8406eef6d41b"/>
+      <index name="id">
+        <index-field name="id"/>
+      </index>
+      <orm-attributes>
+        <attribute name="table">Category</attribute>
+        <attribute name="export-file-name">Category.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\CategoryBundle\Entity\Category" to="\UserBundle\Entity\User" owner-alias="" inverse-alias="idUser" many-owner="true" many-inverse="false" parent-required="true" uuid="6fa9a228-9b3c-46f1-99d3-aadff383470f">
+      <association-field from="idUser_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+  </module>
+  <module name="\src/CommentBundle/Entity" local-name="src/CommentBundle/Entity" namespace="\CommentBundle\Entity" local-namespace="\CommentBundle\Entity" export-format="Doctrine2Php" export-path="src/CommentBundle/Entity" uuid="62cda161-8f85-4e57-a344-21a457b35605">
+    <entity name="\CommentBundle\Entity\Comment" local-name="Comment" namespace="\CommentBundle\Entity" uuid="4473baab-ff72-448a-9810-359e13a730c9">
+      <field name="id" type="integer" required="true" primary="true" uuid="196ad127-b971-42de-8887-c4ed7af625a6">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="content" type="string" size="255" uuid="50a5f394-9d08-4cd6-b15d-7ee6d2586648">
+        <orm-attributes>
+          <attribute name="column">content</attribute>
+        </orm-attributes>
+      </field>
+      <field name="user_id" required="true" uuid="1c0e9560-2534-4f90-b0c7-580f896f06c8"/>
+      <field name="post" uuid="0caa9275-407a-4f1f-96fa-88380c9b09d3"/>
+      <index name="id">
+        <index-field name="id"/>
+      </index>
+      <orm-attributes>
+        <attribute name="table">comment</attribute>
+        <attribute name="export-file-name">Comment.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\CommentBundle\Entity\Comment" to="\UserBundle\Entity\User" owner-alias="" inverse-alias="user" many-owner="true" many-inverse="false" parent-required="true" uuid="fcdece75-f7dd-4db0-8e1e-070f32b6db23">
+      <association-field from="user_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\CommentBundle\Entity\Comment" to="\PostBundle\Entity\Post" owner-alias="" inverse-alias="post" many-owner="true" many-inverse="false" uuid="fe16fa78-2c42-423e-a1d0-d9bcf78efd4b">
+      <association-field from="post" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+  </module>
+  <module name="\src/PostBundle/Entity" local-name="src/PostBundle/Entity" namespace="\PostBundle\Entity" local-namespace="\PostBundle\Entity" export-format="Doctrine2Php" export-path="src/PostBundle/Entity" uuid="712bcc44-248d-4029-9a97-ae00a2be37c5">
+    <entity name="\PostBundle\Entity\PostCategory" local-name="PostCategory" namespace="\PostBundle\Entity" uuid="e3250e2c-476e-4e78-9724-9e16c8eaa71b">
+      <field name="Post_id" type="integer" uuid="201b49fe-382a-44ae-816e-4015aec00fe8"/>
+      <field name="Category_id" type="integer" uuid="617a8664-1e1c-4808-91c7-dc29e91251bd"/>
+    </entity>
+    <many-to-many mn-entity="\PostBundle\Entity\PostCategory" uuid="f457735d-c8d9-45ff-a2af-20f082d84bc1">
+      <many-to-many-entity name="\PostBundle\Entity\Post" owning-side="true" uuid="40496275-1f82-4c33-9b83-6eb160a472db">
+        <many-to-many-field from="Post_id" to="id"/>
+        <orm-attributes>
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </orm-attributes>
+      </many-to-many-entity>
+      <many-to-many-entity name="\CategoryBundle\Entity\Category" owning-side="false" alias="categories" uuid="b5faa8c2-c593-4118-85cf-9fdc054597e7">
+        <many-to-many-field from="Category_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
+    <entity name="\PostBundle\Entity\Post" local-name="Post" namespace="\PostBundle\Entity" uuid="4cfa6c16-e411-44b9-85e4-032bc96080e2">
+      <field name="id" type="integer" required="true" primary="true" uuid="72614959-6165-44f1-a3b0-fd35d93aaebb">
+        <orm-attributes>
+          <attribute name="column">id</attribute>
+          <attribute name="generator">
+            <attribute name="strategy">IDENTITY</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="title" type="string" size="50" required="true" uuid="2c868aeb-b57c-497a-b28f-ce72addf22db">
+        <orm-attributes>
+          <attribute name="column">title</attribute>
+        </orm-attributes>
+      </field>
+      <field name="date" type="datetime" size="50" required="true" uuid="46b695f6-6829-492f-bfa2-8f7ec3c4114b">
+        <orm-attributes>
+          <attribute name="column">date</attribute>
+        </orm-attributes>
+      </field>
+      <field name="content" type="text" required="true" uuid="c976262b-59db-4792-8a32-956bd8bf5228">
+        <orm-attributes>
+          <attribute name="column">content</attribute>
+        </orm-attributes>
+      </field>
+      <field name="id_user" uuid="474f07b2-fdfb-4360-a93f-434858bfb7d3"/>
+      <index name="id">
+        <index-field name="id"/>
+      </index>
+      <orm-attributes>
+        <attribute name="table">post</attribute>
+        <attribute name="export-file-name">Post.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\PostBundle\Entity\Post" to="\UserBundle\Entity\User" owner-alias="" inverse-alias="idUser" many-owner="true" many-inverse="false" uuid="a9f027a7-271b-4389-abea-9d7ad83e84a1">
+      <association-field from="id_user" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+  </module>
+  <module name="\src/UserBundle/Entity" local-name="src/UserBundle/Entity" namespace="\UserBundle\Entity" local-namespace="\UserBundle\Entity" export-format="Doctrine2Php" export-path="src/UserBundle/Entity" uuid="c04dc1d3-8eaa-475d-afbd-1545ec5ee245">
+    <entity name="\UserBundle\Entity\User" local-name="User" namespace="\UserBundle\Entity" uuid="e5b60cc2-7039-4104-b6fb-11e5483efb39">
+      <field name="id" type="integer" required="true" primary="true" uuid="e04a4e54-f353-4aad-bd23-4b83a5214e9a">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="table">fos_user</attribute>
+        <attribute name="export-file-name">User.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\vendor/friendsofsymfony/user-bundle/Resources/config/doctrine-mapping" local-name="vendor/friendsofsymfony/user-bundle/Resources/config/doctrine-mapping" namespace="\FOS\UserBundle\Model" local-namespace="\FOS\UserBundle\Model" export-format="Doctrine2Xml" export-path="vendor/friendsofsymfony/user-bundle/Resources/config/doctrine-mapping" uuid="7f7a95d6-7071-41fa-b873-1dfddc1c7da2">
+    <entity name="\FOS\UserBundle\Model\Group" local-name="Group" namespace="\FOS\UserBundle\Model" uuid="9ab5ce6f-3b91-46c3-b34f-ac3ead3a2f5a">
+      <field name="name" type="string" size="255" unique="true" uuid="561df925-bfad-4d2a-a252-a37155614eb6">
+        <orm-attributes>
+          <attribute name="column">name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="roles" type="array" uuid="33f12866-2116-4d97-9737-350e7c97459f">
+        <orm-attributes>
+          <attribute name="column">roles</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-parent type="MAPPED_SUPERCLASS" uuid="3c8a6906-623b-4e79-8185-f301afdc28b5"/>
+      <orm-attributes>
+        <attribute name="export-file-name">Group.orm.xml</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\FOS\UserBundle\Model\User" local-name="User" namespace="\FOS\UserBundle\Model" uuid="9c06f888-bcc5-4e7e-b0c7-8d7acf7773fa">
+      <field name="username" type="string" size="180" uuid="26f04d4c-9476-477c-8b41-c24441e9a7d2">
+        <orm-attributes>
+          <attribute name="column">username</attribute>
+        </orm-attributes>
+      </field>
+      <field name="usernameCanonical" type="string" size="180" unique="true" uuid="2bf99b48-6b08-4d6a-b3ad-f134e0e76c54">
+        <orm-attributes>
+          <attribute name="column">username_canonical</attribute>
+        </orm-attributes>
+      </field>
+      <field name="email" type="string" size="180" uuid="ef21ee1d-cef2-40aa-9d61-3019d5aa96cf">
+        <orm-attributes>
+          <attribute name="column">email</attribute>
+        </orm-attributes>
+      </field>
+      <field name="emailCanonical" type="string" size="180" unique="true" uuid="a6017488-cebd-4d03-a3e2-f50edd5afedc">
+        <orm-attributes>
+          <attribute name="column">email_canonical</attribute>
+        </orm-attributes>
+      </field>
+      <field name="enabled" type="boolean" uuid="370342da-b50a-41fa-865e-37d79a729ca8">
+        <orm-attributes>
+          <attribute name="column">enabled</attribute>
+        </orm-attributes>
+      </field>
+      <field name="salt" type="string" uuid="939f9d9b-0a6a-4567-aba3-282fce42c67f">
+        <orm-attributes>
+          <attribute name="column">salt</attribute>
+        </orm-attributes>
+      </field>
+      <field name="password" type="string" uuid="56d6f553-cbb0-4a70-8c92-f53c714b450a">
+        <orm-attributes>
+          <attribute name="column">password</attribute>
+        </orm-attributes>
+      </field>
+      <field name="lastLogin" type="datetime" uuid="56cf316d-890e-4b74-9722-aed41c65ec9b">
+        <orm-attributes>
+          <attribute name="column">last_login</attribute>
+        </orm-attributes>
+      </field>
+      <field name="locked" type="boolean" uuid="210f3d68-ef5a-474e-aef0-e012e4141c0c">
+        <orm-attributes>
+          <attribute name="column">locked</attribute>
+        </orm-attributes>
+      </field>
+      <field name="expired" type="boolean" uuid="64dd46d9-66be-4fdb-9350-7bae49a01c7d">
+        <orm-attributes>
+          <attribute name="column">expired</attribute>
+        </orm-attributes>
+      </field>
+      <field name="expiresAt" type="datetime" uuid="38e25254-d02a-46d8-a45e-14a8e3f4047a">
+        <orm-attributes>
+          <attribute name="column">expires_at</attribute>
+        </orm-attributes>
+      </field>
+      <field name="confirmationToken" type="string" size="180" unique="true" uuid="42802d0e-f2af-4299-9925-4084976f23a6">
+        <orm-attributes>
+          <attribute name="column">confirmation_token</attribute>
+        </orm-attributes>
+      </field>
+      <field name="passwordRequestedAt" type="datetime" uuid="1eeb35b2-34f2-4d0e-b95f-127be298b37c">
+        <orm-attributes>
+          <attribute name="column">password_requested_at</attribute>
+        </orm-attributes>
+      </field>
+      <field name="roles" type="array" uuid="96b356ee-8f61-4031-be62-4933a483a449">
+        <orm-attributes>
+          <attribute name="column">roles</attribute>
+        </orm-attributes>
+      </field>
+      <field name="credentialsExpired" type="boolean" uuid="3e697ad7-2082-4267-8951-0cbf5b24f0e6">
+        <orm-attributes>
+          <attribute name="column">credentials_expired</attribute>
+        </orm-attributes>
+      </field>
+      <field name="credentialsExpireAt" type="datetime" uuid="d6cb8a95-ceb6-4cc8-b8b5-bf6810c569ac">
+        <orm-attributes>
+          <attribute name="column">credentials_expire_at</attribute>
+        </orm-attributes>
+      </field>
+      <inheritance-parent type="MAPPED_SUPERCLASS" uuid="8c3f3bec-2254-411f-9571-c94903ac313e"/>
+      <orm-attributes>
+        <attribute name="export-file-name">User.orm.xml</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" local-name="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" local-namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" export-format="Doctrine2Php" export-path="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/Fixtures" uuid="8f241257-28aa-45ac-a3e2-a8cd656b9776">
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" local-name="AssociationEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="3266fe82-6b7d-4ee3-9e17-865d951af90d">
+      <field name="id" type="integer" required="true" primary="true" uuid="ce571396-8035-4fb0-9f14-62f8b35d4f68">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="composite_id1" uuid="3ae406a5-f8de-4bca-8165-5d790acec246"/>
+      <field name="composite_id2" uuid="8c94cfc2-d159-4516-abae-ccba1df148db"/>
+      <field name="single_id" uuid="f594f87a-c614-4473-ab8b-8207d4c5f026"/>
+      <orm-attributes>
+        <attribute name="export-file-name">AssociationEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity" owner-alias="" inverse-alias="single" many-owner="true" many-inverse="false" uuid="ab68ccb9-8634-4335-831f-29c6f471c41b">
+      <association-field from="single_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\AssociationEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeIntIdEntity" owner-alias="" inverse-alias="composite" many-owner="true" many-inverse="false" uuid="4e904115-a0f4-428d-8ee3-3b96e1f44d63">
+      <association-field from="composite_id1" to="id1"/>
+      <association-field from="composite_id2" to="id2"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeIntIdEntity" local-name="CompositeIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="0391c065-3b80-460f-98cc-f4f203d62b42">
+      <field name="id1" type="integer" required="true" primary="true" uuid="43b562df-d20b-4724-815e-4fa9799930aa"/>
+      <field name="id2" type="integer" required="true" primary="true" uuid="011a1788-1655-4af2-b979-ab1e85519090"/>
+      <field name="name" type="string" uuid="cc5d786c-5b29-44f9-88a8-a8119d928978"/>
+      <orm-attributes>
+        <attribute name="export-file-name">CompositeIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\CompositeStringIdEntity" local-name="CompositeStringIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="ec542213-36bc-4704-a20a-e6ff0924fa45">
+      <field name="id1" type="string" required="true" primary="true" uuid="e8fbfe26-4e8f-45c6-a3ee-6b1599c0fe79"/>
+      <field name="id2" type="string" required="true" primary="true" uuid="77742258-7e05-4588-bf45-6936d33c4878"/>
+      <field name="name" type="string" uuid="b08eef1d-8f6d-44ec-b1d6-c556bc8d4b37"/>
+      <orm-attributes>
+        <attribute name="export-file-name">CompositeStringIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\DoubleNameEntity" local-name="DoubleNameEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="31a9037c-e223-49a4-b768-a3ce96d1389e">
+      <field name="id" type="integer" required="true" primary="true" uuid="c62ba679-a864-4607-bcc2-d2fb31fc6637"/>
+      <field name="name" type="string" uuid="65085769-d3d2-46ff-b690-a1b84891d455"/>
+      <field name="name2" type="string" uuid="0f022b9a-f0b8-4b83-b703-d0468c6c709d"/>
+      <orm-attributes>
+        <attribute name="export-file-name">DoubleNameEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\GroupableEntity" local-name="GroupableEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="81679d61-eefe-44fa-b293-7a4edd250002">
+      <field name="id" type="integer" required="true" primary="true" uuid="7dbbc348-2e7e-4a46-b979-035a8daa34d6"/>
+      <field name="name" type="string" uuid="fc14af8f-f12c-46f4-8fcb-802ad630208c"/>
+      <field name="groupName" type="string" uuid="46affc9c-085f-40f0-a460-fd030e4d7041"/>
+      <orm-attributes>
+        <attribute name="export-file-name">GroupableEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleAssociationToIntIdEntity" local-name="SingleAssociationToIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="92529b42-9fa5-4fd6-89ab-2bbda2cd7d6c">
+      <field name="entity" required="true" primary="true" uuid="7856e53f-b8ee-405f-85a7-b49868cab6b3"/>
+      <field name="name" type="string" uuid="eaa744c6-48b5-4999-8030-8b2cc867e608"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleAssociationToIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleAssociationToIntIdEntity" to="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdNoToStringEntity" owner-alias="" inverse-alias="entity" many-owner="true" many-inverse="false" parent-required="true" uuid="bfcb4c68-756a-48f5-b63a-cc7602fd9eb2">
+      <association-field from="entity" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="cascade">
+            <attribute name="cascade-all">true</attribute>
+          </attribute>
+        </attribute>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdEntity" local-name="SingleIntIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="f661d8f4-67de-4684-bf04-00a27921b1e6">
+      <field name="id" type="integer" required="true" primary="true" uuid="b69dee0d-c5ab-42eb-a84f-889f8ddf82f0"/>
+      <field name="name" type="string" uuid="cefe9791-b3c3-41c7-855b-9d27542d7797"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleIntIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleIntIdNoToStringEntity" local-name="SingleIntIdNoToStringEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="524968fb-47a9-4348-a510-71ea48a6ccc6">
+      <field name="id" type="integer" required="true" primary="true" uuid="06322aa1-187d-4279-8df8-943de85b80e7"/>
+      <field name="name" type="string" uuid="0497a93e-b76d-4bfb-901a-8bd31e670728"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleIntIdNoToStringEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\SingleStringIdEntity" local-name="SingleStringIdEntity" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="856f84cc-1105-4152-8d02-b700438234ba">
+      <field name="id" type="string" required="true" primary="true" uuid="37cb5292-b4cd-434d-b1b1-df36365ca667"/>
+      <field name="name" type="string" uuid="63bc416f-1910-481c-9685-c472820666b6"/>
+      <orm-attributes>
+        <attribute name="export-file-name">SingleStringIdEntity.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\Fixtures\User" local-name="User" namespace="\Symfony\Bridge\Doctrine\Tests\Fixtures" uuid="16309238-3fa1-4f6e-bc2e-bc8b526c0036">
+      <field name="id1" type="integer" required="true" primary="true" uuid="3fd4b649-4c00-4456-b84c-4d0373680a34"/>
+      <field name="id2" type="integer" required="true" primary="true" uuid="ee238e36-ddeb-46e2-bf1c-422434ac293b"/>
+      <field name="name" type="string" uuid="86fbcb55-4cac-4500-97c9-ee14ead38be8"/>
+      <orm-attributes>
+        <attribute name="export-file-name">User.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/PropertyInfo/Fixtures" local-name="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/PropertyInfo/Fixtures" namespace="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures" local-namespace="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures" export-format="Doctrine2Php" export-path="vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Tests/PropertyInfo/Fixtures" uuid="caab45b7-aebc-458c-aa11-4ba0f3f73737">
+    <entity name="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures\DoctrineDummy" local-name="DoctrineDummy" namespace="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures" uuid="ddaf8340-9eee-4396-83c8-74b4062c778a">
+      <field name="id" type="smallint" required="true" primary="true" uuid="ca5790e2-2909-4b98-aec8-c21447bf33e0"/>
+      <field name="guid" type="guid" uuid="1acb286b-3892-47e0-9adc-71ff00a36864"/>
+      <field name="time" type="time" uuid="8dfa51d2-fb43-4357-a12f-d5c8473215ef"/>
+      <field name="json" type="json_array" uuid="72754b0c-02e8-46e7-a726-97691c266a9d"/>
+      <field name="simpleArray" type="simple_array" uuid="3d97ed80-8193-4362-b049-5ac7cea204f5"/>
+      <field name="bool" type="boolean" uuid="03ca7604-956e-468e-bbee-8ab937a47480"/>
+      <field name="binary" type="binary" uuid="107ff583-ebe2-46d3-8b83-142aed2d8bed"/>
+      <field name="foo_id" uuid="77fc72f4-bd93-400e-ac8b-5d3ec35ee5e0"/>
+      <orm-attributes>
+        <attribute name="export-file-name">DoctrineDummy.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures\DoctrineDummy" to="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures\DoctrineRelation" owner-alias="" inverse-alias="foo" many-owner="true" many-inverse="false" uuid="5c9b2668-2747-451f-b73a-1c1017df7988">
+      <association-field from="foo_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures\DoctrineRelation" local-name="DoctrineRelation" namespace="\Symfony\Bridge\Doctrine\Tests\PropertyInfo\Fixtures" uuid="7c680391-726f-49a8-bab8-5d6f3206d4c8">
+      <field name="id" type="smallint" required="true" primary="true" uuid="bd7c9abb-55f2-489c-8d6e-bb2c98beb369"/>
+      <orm-attributes>
+        <attribute name="export-file-name">DoctrineRelation.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" local-name="vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" namespace="\" export-format="Doctrine2Xml" export-path="vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config" uuid="cb538827-92f5-4863-9caa-1b4c6a276d12"/>
+  <visual-data>
+    <association uuid="4e904115-a0f4-428d-8ee3-3b96e1f44d63" color="#00B4D0"/>
+    <association uuid="5c9b2668-2747-451f-b73a-1c1017df7988" color="#0A783D"/>
+    <association uuid="6fa9a228-9b3c-46f1-99d3-aadff383470f" color="#F4931F"/>
+    <association uuid="a9f027a7-271b-4389-abea-9d7ad83e84a1" color="#8A54A2"/>
+    <association uuid="ab68ccb9-8634-4335-831f-29c6f471c41b" color="#2E63AF"/>
+    <association uuid="bfcb4c68-756a-48f5-b63a-cc7602fd9eb2" color="#A8A8A8"/>
+    <association uuid="fcdece75-f7dd-4db0-8e1e-070f32b6db23" color="#B31F24"/>
+    <association uuid="fe16fa78-2c42-423e-a1d0-d9bcf78efd4b" color="#C774AF"/>
+    <entity uuid="0391c065-3b80-460f-98cc-f4f203d62b42" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="227" position-y="40" size-x="0" size-x2="104" size-y="0" size-y2="59"/>
+    <entity uuid="16309238-3fa1-4f6e-bc2e-bc8b526c0036" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="53" position-y="379" size-x="0" size-x2="80" size-y="0" size-y2="59"/>
+    <entity uuid="2c8cc2f3-39ff-42e4-b2bb-199b50b8ec77" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="31a9037c-e223-49a4-b768-a3ce96d1389e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="47" position-y="153" size-x="0" size-x2="92" size-y="0" size-y2="59"/>
+    <entity uuid="3266fe82-6b7d-4ee3-9e17-865d951af90d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="50" position-y="40" size-x="0" size-x2="86" size-y="0" size-y2="73"/>
+    <entity uuid="4473baab-ff72-448a-9810-359e13a730c9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="109" size-y="0" size-y2="73"/>
+    <entity uuid="4cfa6c16-e411-44b9-85e4-032bc96080e2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="24" position-y="40" size-x="0" size-x2="104" size-y="0" size-y2="87"/>
+    <entity uuid="524968fb-47a9-4348-a510-71ea48a6ccc6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="211" position-y="266" size-x="0" size-x2="135" size-y="0" size-y2="45"/>
+    <entity uuid="7c680391-726f-49a8-bab8-5d6f3206d4c8" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="46" position-y="209" size-x="0" size-x2="85" size-y="0" size-y2="31"/>
+    <entity uuid="81679d61-eefe-44fa-b293-7a4edd250002" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="226" position-y="153" size-x="0" size-x2="105" size-y="0" size-y2="59"/>
+    <entity uuid="856f84cc-1105-4152-8d02-b700438234ba" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="415" position-y="266" size-x="0" size-x2="100" size-y="0" size-y2="45"/>
+    <entity uuid="92529b42-9fa5-4fd6-89ab-2bbda2cd7d6c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="392" position-y="153" size-x="0" size-x2="146" size-y="0" size-y2="45"/>
+    <entity uuid="9ab5ce6f-3b91-46c3-b34f-ac3ead3a2f5a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="51" position-y="40" size-x="0" size-x2="101" size-y="0" size-y2="45"/>
+    <entity uuid="9c06f888-bcc5-4e7e-b0c7-8d7acf7773fa" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="223" position-y="40" size-x="0" size-x2="163" size-y="0" size-y2="241"/>
+    <entity uuid="ddaf8340-9eee-4396-83c8-74b4062c778a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="138" size-y="0" size-y2="129"/>
+    <entity uuid="e3250e2c-476e-4e78-9724-9e16c8eaa71b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="167" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
+    <entity uuid="e5b60cc2-7039-4104-b6fb-11e5483efb39" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
+    <entity uuid="ec542213-36bc-4704-a20a-e6ff0924fa45" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="405" position-y="40" size-x="0" size-x2="120" size-y="0" size-y2="59"/>
+    <entity uuid="f661d8f4-67de-4684-bf04-00a27921b1e6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="51" position-y="266" size-x="0" size-x2="84" size-y="0" size-y2="45"/>
+    <many-to-many-association uuid="f457735d-c8d9-45ff-a2af-20f082d84bc1" color="#61D351"/>
+    <module uuid="37def56d-cea6-4746-808e-a50d35ad4a39" bg-color="#E7F5FD" position-x="1087" position-y="855" size-x="0" size-x2="141" size-y="0" size-y2="119"/>
+    <module uuid="62cda161-8f85-4e57-a344-21a457b35605" bg-color="#E7F3E7" position-x="1087" position-y="622" size-x="0" size-x2="149" size-y="0" size-y2="133"/>
+    <module uuid="712bcc44-248d-4029-9a97-ae00a2be37c5" bg-color="#FEFCE8" position-x="834" position-y="622" size-x="0" size-x2="153" size-y="0" size-y2="274"/>
+    <module uuid="7f7a95d6-7071-41fa-b873-1dfddc1c7da2" bg-color="#FDEBEF" position-x="50" position-y="622" size-x="0" size-x2="406" size-y="0" size-y2="301"/>
+    <module uuid="8f241257-28aa-45ac-a3e2-a8cd656b9776" bg-color="#EAE4F1" position-x="50" position-y="50" size-x="0" size-x2="558" size-y="0" size-y2="472"/>
+    <module uuid="c04dc1d3-8eaa-475d-afbd-1545ec5ee245" bg-color="#FEEFE3" position-x="1087" position-y="1074" size-x="0" size-x2="109" size-y="0" size-y2="100"/>
+    <module uuid="caab45b7-aebc-458c-aa11-4ba0f3f73737" bg-color="#E7F5FD" position-x="556" position-y="622" size-x="0" size-x2="178" size-y="0" size-y2="358"/>
+    <module uuid="cb538827-92f5-4863-9caa-1b4c6a276d12" bg-color="#E7F3E7" position-x="1087" position-y="1274" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <project uuid="7555c14a-4339-4e38-afc4-2e32475912d2" size-x="0" size-x2="1286" size-y="0" size-y2="1424"/>
+  </visual-data>
+</skipper>

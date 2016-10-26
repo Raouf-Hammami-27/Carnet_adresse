@@ -1,0 +1,21 @@
+.conciergeBarContentInner{
+	margin : 20px 50px;
+}
+
+.button {
+    background-color: rgba(0,0,0,0.5);
+    display: inline-block;
+  border-radius: 4px;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.acceuil{
+	margin: auto;
+}

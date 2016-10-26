@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/0blog/src/CategoryBundle/Resources/views/Category/index.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/views/Post/show.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/views/main.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/app/config/security.yml</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Controller/PostController.php</file>
+            <file>file:/C:/wamp/www/0blog/src/CommentBundle/Resources/views/Comment/edit.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/show_content.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/CategoryBundle/Resources/views/Category/add.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/UserBundle/Resources/views/User/index.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Entity/Post.php</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/views/Post/index.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/CommentBundle/Resources/views/Comment/index.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/CategoryBundle/Controller/CategoryController.php</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/config/routing/group.xml</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/confirmed.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/CategoryBundle/Resources/views/Category/edit.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Controller/RegistrationController.php</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Form/PostType.php</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/CommentBundle/Resources/views/Comment/add.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/views/Post/edit.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Controller/SecurityController.php</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/vendor/friendsofsymfony/user-bundle/Resources/config/routing/security.xml</file>
+            <file>file:/C:/wamp/www/0blog/src/CommentBundle/Resources/views/Comment/show.html.twig</file>
+            <file>file:/C:/wamp/www/0blog/src/UserBundle/Controller/UserController.php</file>
+            <file>file:/C:/wamp/www/0blog/src/PostBundle/Resources/views/Post/add.html.twig</file>
+        </group>
+    </open-files>
+</project-private>

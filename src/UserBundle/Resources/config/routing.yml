@@ -1,0 +1,29 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+user_index:
+    path:     /users
+    defaults: { _controller: UserBundle:User:index }
+user_make_moderator:
+    path:     /make/{id}
+    defaults: { _controller: UserBundle:User:makeModerator }
+user_make_admin:
+    path:     /makeAdmin/{id}
+    defaults: { _controller: UserBundle:User:makeAdmin }
+
+
+contact_index:
+    path:     /contacts
+    defaults: { _controller: UserBundle:Contact:index }
+contact_show:
+    path:     /contact/show/{id}
+    defaults: { _controller: UserBundle:Contact:show }
+contact_edit:
+    path:     /contact/edit/{id}
+    defaults: { _controller: UserBundle:Contact:edit }
+contact_delete:
+    path:     /contact/delete/{id}
+    defaults: { _controller: UserBundle:Contact:delete }
+contact_new:
+    path:     /contact/create
+    defaults: { _controller: UserBundle:Contact:new }
